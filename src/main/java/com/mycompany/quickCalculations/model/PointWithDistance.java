@@ -1,6 +1,9 @@
 package com.mycompany.quickCalculations.model;
 
+import com.google.common.base.MoreObjects;
+
 public class PointWithDistance {
+
     private final short x;
     private final short y;
     private final double distance;
@@ -10,7 +13,7 @@ public class PointWithDistance {
         this.y = y;
         this.distance = this.getDistance(startX, startY);
     }
-    
+
     public short getX() {
         return x;
     }
@@ -22,15 +25,17 @@ public class PointWithDistance {
     public double getDistance() {
         return distance;
     }
-    
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Distance: ").append(distance).append("\tx: ").append(x).append("\ty: ").append(y);
-        return sb.toString();
+        return MoreObjects.toStringHelper(this.getClass()).
+                add("Distance", distance).
+                add("x", x).
+                add("y", y).
+                toString();
     }
 
     private double getDistance(short startX, short startY) {
         return Math.sqrt(Math.pow((x - startX), 2) + Math.pow((y - startY), 2));
-    } 
+    }
 }
