@@ -11,7 +11,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class Main {
-
     public static final String PATH = "points";
 
     private static final short START_X = -200;
@@ -67,7 +66,7 @@ public class Main {
     }
 
     public short getCoordinate(byte[] bytearray) {
-        ByteBuffer wrapped = ByteBuffer.wrap(bytearray); // big-endian by default
+        ByteBuffer wrapped = ByteBuffer.wrap(bytearray);
         return wrapped.getShort();
     }
 
