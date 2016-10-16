@@ -1,14 +1,14 @@
 package com.mycompany.quickCalculations.model;
 
 import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.concurrent.PriorityBlockingQueue;
 
-public class FixedSizePriorityQueue extends PriorityQueue<PointWithDistance> {
+public class FixedSizePriorityQueue extends PriorityBlockingQueue<PointWithDistance> {
     private final short limit;
     private static final PointWithDistanceComparator COMPARATOR = new PointWithDistanceComparator();
 
     private FixedSizePriorityQueue(final short limit, final Comparator c) {
-        super (c);
+        super (limit, c);
         this.limit = limit;
     }
     

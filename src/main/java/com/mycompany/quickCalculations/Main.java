@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
 
@@ -22,6 +24,8 @@ public class Main {
 
     private static final short QUEUE_SIZE_CLOSEST = 10;
     private static final short QUEUE_SIZE_FURTHEST = 20;
+    
+    private ExecutorService executor;
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         long start = System.currentTimeMillis();
@@ -39,23 +43,29 @@ public class Main {
         FixedSizePriorityQueue queueFurtherst = FixedSizePriorityQueue.getReversedQueue(QUEUE_SIZE_FURTHEST);
 
         File file = new File(classLoader.getResource(PATH).getFile());
-        BufferedInputStream input;
-        input = new BufferedInputStream(new FileInputStream(file));
+        BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
         try {
             byte[] coordinate = new byte[4];
 
             while (input.read(coordinate) != -1) {
                 short x = getCoordinate(Arrays.copyOfRange(coordinate, 0, 2));
                 short y = getCoordinate(Arrays.copyOfRange(coordinate, 2, coordinate.length));
-                PointWithDistance p = new PointWithDistance(x, y, START_X, START_Y);
-                PointWithDistance q = new PointWithDistance(x, y, START_X1, START_Y1);
-                queueClosest.add(p);
-                queueFurtherst.add(q);
+                
+                executorService.submit(() -> {
+                    queueClosest.add(new PointWithDistance(x, y, START_X, START_Y));              
+                });
+                
+                executorService.submit(() -> {
+                    queueFurtherst.add(new PointWithDistance(x, y, START_X1, START_Y1));              
+                });
+               
             }
         } catch (FileNotFoundException ex) {
             throw new RuntimeException("No file found to be processed", ex);
         } finally {
             input.close();
+            executorService.shutdown();
         }
 
         StringBuilder sb = new StringBuilder()
@@ -70,5 +80,5 @@ public class Main {
         ByteBuffer wrapped = ByteBuffer.wrap(bytearray); // big-endian by default
         return wrapped.getShort();
     }
-
+    
 }
