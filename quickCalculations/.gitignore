@@ -7,7 +7,7 @@ nbdist/
 target/
 nbactions.xml
 nb-configuration.xml
-
+.idea/
 # Class Files #
 *.class
 
