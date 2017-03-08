@@ -27,7 +27,7 @@ public class BstTree<T extends Comparable> {
         if (y == null) {
             root = newNode;
         } else {
-            if(newNode.getValue().compareTo(y.getValue()) < 0) {
+            if (newNode.getValue().compareTo(y.getValue()) < 0) {
                 y.setLeftSon(newNode);
             } else {
                 y.setRightSon(newNode);
@@ -38,18 +38,19 @@ public class BstTree<T extends Comparable> {
     }
 
 
-
     public boolean contains(T value) {
-        if (root == null) {
-            return false;
-        }
-
         Node x = root;
-        while(x != null) {
-            if (value.compareTo())
+        while (x != null) {
+            if (x.getValue().compareTo(value) > 0) {
+                x = x.getLeftSon();
+            } else if (x.getValue().compareTo(value) == 0) {
+                return true;
+            } else {
+                x = x.getRightSon();
+            }
         }
 
-
+        return false;
     }
 
     public Node delete(Integer value) {
