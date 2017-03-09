@@ -1,5 +1,7 @@
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import tree.BstTree;
+import tree.Node;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -15,7 +17,7 @@ public class TreeTest {
         BstTree tree = new BstTree();
         Integer value = 10;
         tree.add(value);
-        //  assertThat(tree.contains(value), is(true));
+        assertThat(tree.contains(value), is(true));
         assertThat(tree.getRoot().getValue(), is(value));
     }
 
@@ -73,6 +75,26 @@ public class TreeTest {
         assertThat(tree.contains(value2), is(false));
         assertThat(tree.contains(value3), is(true));
     }
+
+    @Test
+    public void deleteRootOnly() {
+        BstTree tree = new BstTree();
+
+        tree.add(value2);
+        tree.delete(value2);
+
+        assertThat(tree.contains(value2), is(false));
+        assertThat(tree.contains(value2), is(false));
+    }
+
+    @Test
+    public void deleteEmptyTree() {
+        BstTree tree = new BstTree();
+        Node result = tree.delete(value2);
+        assertThat(tree.contains(value2), is(false));
+        assertThat(result, IsNull.nullValue());
+    }
+
 
 
 }
