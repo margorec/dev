@@ -45,7 +45,33 @@ public class TreeTest {
         assertThat(tree.contains(value3), is(false));
         assertThat(tree.contains(value2), is(true));
         assertThat(tree.contains(value1), is(true));
+    }
 
+    @Test
+    public void getMinimumNode() {
+        BstTree tree = new BstTree();
+        tree.add(value1);
+        tree.add(value2);
+        tree.add(value3);
+        tree.add(value4);
+
+        assertThat(tree.getMinNode(tree.getRoot()).getValue(), is(value2));
+    }
+
+    @Test
+    public void delete() {
+        BstTree tree = new BstTree();
+
+        tree.add(value1);
+        tree.add(value2);
+        tree.add(value3);
+        tree.add(value4);
+        tree.delete(value1);
+        tree.delete(value2);
+
+        assertThat(tree.contains(value1), is(false));
+        assertThat(tree.contains(value2), is(false));
+        assertThat(tree.contains(value3), is(true));
     }
 
 

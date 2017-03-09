@@ -41,4 +41,8 @@ public class Node<T extends Comparable> {
         return value;
     }
 
+    public void setValue(T value) {
+        this.value = value;
+    }
+
 }
