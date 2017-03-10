@@ -1,7 +1,9 @@
+package com.gorecki.tree;
+
+import com.gorecki.tree.BstTree;
+import com.gorecki.tree.Node;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import tree.BstTree;
-import tree.Node;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -95,6 +97,26 @@ public class TreeTest {
         assertThat(result, IsNull.nullValue());
     }
 
+    @Test
+    public void size() {
+        BstTree tree = new BstTree();
+        tree.add(value1);
+        tree.add(value2);
+        tree.add(value3);
+        tree.add(value4);
+
+        assertThat(tree.getSize(tree.getRoot()), is(3));
+    }
+
+    @Test
+    public void testToString() {
+        BstTree tree = new BstTree();
+        tree.add(value1);
+        tree.add(value2);
+        tree.add(value3);
+        tree.add(value4);
+        System.out.println(tree.toString());
+    }
 
 
 }

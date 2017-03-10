@@ -1,4 +1,4 @@
-package tree;
+package com.gorecki.tree;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -119,5 +119,30 @@ public class BstTree<T extends Comparable> {
 
     public Node getRoot() {
         return root;
+    }
+
+    public int getSize(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + Math.max(getSize(node.getLeftSon()), getSize(node.getRightSon()));
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        visitInOrder(root, sb);
+        return sb.toString();
+    }
+
+    public void visitInOrder(Node node, StringBuilder sb) {
+        if (node.getLeftSon() != null) {
+            visitInOrder(node.getLeftSon(), sb);
+        }
+
+        sb.append(node.getValue()).append(" ");
+
+        if (node.getRightSon() != null) {
+            visitInOrder(node.getRightSon(), sb);
+        }
     }
 }

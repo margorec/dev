@@ -1,4 +1,4 @@
-package tree;
+package com.gorecki.tree;
 
 public interface Tree<T> {
     Node add(T value);

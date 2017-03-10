@@ -1,4 +1,4 @@
-package tree;
+package com.gorecki.tree;
 
 public class Node<T extends Comparable> {
     private Node parent;
