@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title> Tree emulation </title>
+    <link rel="stylesheet" href="Treant.css"/>
+    <link rel="stylesheet" href="super-simple.css"/>
+</head>
+<body>
+<div class="chart" id="custom-colored"> --@--</div>
+
+<script src="raphael.js"></script>
+<script src="Treant.js"></script>
+
+<script th:inline="text">
+/*<![CDATA[*/
+var config = {
+        container: "#custom-colored",
+
+        nodeAlign: "BOTTOM",
+
+        connectors: {
+            type: 'step'
+        },
+        node: {
+            HTMLclass: 'nodeExample1'
+        }
+    },
+    [[${tree}]]
+	new Treant(treeConfig);
+/*]]>*/
+
+</script>
+
+</body>
+</html>
