@@ -15,7 +15,7 @@ apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
 
 jar {
-	baseName = 'BSTwebpapp'
+	baseName = 'BSTwebapp'
 	version = '0.0.1-SNAPSHOT'
 }
 
