@@ -6,5 +6,5 @@ script:
   - cd quickCalculations
   - mvn clean install
 
-  # Test Coverage
-  - mvn cobertura:cobertura coveralls:cobertura
+  - cd ../BSTwebapp/
+  - gradle build jacocoTestReport
