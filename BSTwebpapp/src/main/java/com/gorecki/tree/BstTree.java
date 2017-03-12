@@ -1,8 +1,11 @@
 package com.gorecki.tree;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class BstTree<T extends Comparable> {
     private Node root = null;
@@ -121,28 +124,62 @@ public class BstTree<T extends Comparable> {
         return root;
     }
 
-    public int getSize(Node node) {
+    public int getDepth(Node node) {
         if (node == null) {
             return 0;
         }
-        return 1 + Math.max(getSize(node.getLeftSon()), getSize(node.getRightSon()));
+        return 1 + Math.max(getDepth(node.getLeftSon()), getDepth(node.getRightSon()));
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        visitInOrder(root, sb);
+        getNodes().forEach(n -> sb.append(n.getValue()).append(" "));
         return sb.toString();
     }
 
-    public void visitInOrder(Node node, StringBuilder sb) {
+    private void visitInOrder(Node node, List<Node> nodes) {
         if (node.getLeftSon() != null) {
-            visitInOrder(node.getLeftSon(), sb);
+            visitInOrder(node.getLeftSon(), nodes);
         }
 
-        sb.append(node.getValue()).append(" ");
+        nodes.add(node);
 
         if (node.getRightSon() != null) {
-            visitInOrder(node.getRightSon(), sb);
+            visitInOrder(node.getRightSon(), nodes);
         }
     }
+
+    private void visitPreOrder(Node node, List<Node> nodes) {
+        nodes.add(node);
+
+        if (node.getLeftSon() != null) {
+            visitPreOrder(node.getLeftSon(), nodes);
+        }
+
+        if (node.getRightSon() != null) {
+            visitPreOrder(node.getRightSon(), nodes);
+        }
+    }
+
+
+    public List<Node> getNodes() {
+        List<Node> nodes = new LinkedList<>();
+        visitPreOrder(root, nodes);
+        return nodes;
+    }
+
+    public String getJs() {
+        StringBuilder sb = new StringBuilder();
+        List<String> nodeNames = new LinkedList<>();
+        nodeNames.add("config");
+
+        for (Node node : getNodes()) {
+            nodeNames.add(node.jsName());
+            sb.append(node.serializeToJs()).append(", ");
+        }
+        sb.append("treeConfig=").append(StringUtils.join(Arrays.asList(nodeNames), ", ")).append(";");
+
+        return sb.toString();
+    }
+
 }

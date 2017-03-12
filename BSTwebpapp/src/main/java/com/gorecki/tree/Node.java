@@ -45,4 +45,22 @@ public class Node<T extends Comparable> {
         this.value = value;
     }
 
+    public String serializeToJs() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(jsName()).append(" = {");
+
+        if (getParent() != null) {
+            sb.append("parent:").append("n_").append(getParent().getValue()).append(", ");
+        }
+
+        sb.append("text:{name:")
+                .append(value)
+                .append("}}");
+
+        return sb.toString();
+    }
+
+    public String jsName() {
+        return "n_" + getValue();
+    }
 }
