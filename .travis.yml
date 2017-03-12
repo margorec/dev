@@ -3,8 +3,5 @@ jdk:
   - oraclejdk8
 
 script:
-  - cd quickCalculations
-  - mvn clean install
-
-  - cd ../BSTwebapp/
+  - cd BSTwebapp
   - gradle build jacocoTestReport
