@@ -4,8 +4,11 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -112,8 +115,26 @@ public class TreeTest {
     @Test
     public void getNodes_visitPreOrder() {
         BstTree<Integer> tree = createTestTree();
-        String subject = tree.getNodes().stream().map(n -> n.getValue().toString()).collect(Collectors.joining(","));
+        String subject = tree.getNodes().stream().map(n -> n.getValue().toString()).collect(joining(","));
 
         assertThat(subject, is("10,2,30,100"));
+    }
+
+    @Test
+    public void visitInOrder() {
+        BstTree<Integer> tree = createTestTree();
+        List<Node> subject = new LinkedList<>();
+        tree.visitInOrder(tree.getRoot(), subject);
+        assertThat(subject.stream().map(n -> n.getValue().toString()).collect(joining(",")), is("2,10,30,100"));
+    }
+
+    @Test
+    public void testJs() {
+        BstTree<Integer> tree = new BstTree<>();
+        Arrays.asList(32,12,15,11,45,47,46,76,49).stream().forEachOrdered(tree::add);
+
+        String expectedString = "n_32 = {text:{name:32}}, n_12 = {parent:n_32, text:{name:12}}, n_11 = {parent:n_12, text:{name:11}}, n_15 = {parent:n_12, text:{name:15}}, n_45 = {parent:n_32, text:{name:45}}, n_47 = {parent:n_45, text:{name:47}}, n_46 = {parent:n_47, text:{name:46}}, n_76 = {parent:n_47, text:{name:76}}, n_49 = {parent:n_76, text:{name:49}}, treeConfig=[config, n_32, n_12, n_11, n_15, n_45, n_47, n_46, n_76, n_49];";
+        assertThat(tree.getJs(), is(expectedString));
+
     }
 }

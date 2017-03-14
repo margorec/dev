@@ -137,7 +137,7 @@ public class BstTree<T extends Comparable> {
         return sb.toString();
     }
 
-    private void visitInOrder(Node node, List<Node> nodes) {
+    void visitInOrder(Node node, List<Node> nodes) {
         if (node.getLeftSon() != null) {
             visitInOrder(node.getLeftSon(), nodes);
         }
@@ -149,7 +149,7 @@ public class BstTree<T extends Comparable> {
         }
     }
 
-    private void visitPreOrder(Node node, List<Node> nodes) {
+    void visitPreOrder(Node node, List<Node> nodes) {
         nodes.add(node);
 
         if (node.getLeftSon() != null) {
