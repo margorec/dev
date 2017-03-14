@@ -14,15 +14,18 @@ public class ShowTree {
 
     @RequestMapping("/tree")
     public String tree(@RequestParam(value = "numbers") final String numbers, Model model) {
-        BstTree tree = new BstTree<Integer>();
-        List<String> treeItems = Arrays.asList(numbers.split(","));
-        for (String n : treeItems) {
-            tree.add(Integer.valueOf(n));
-        }
-
+        BstTree<Integer> tree = feedTree(numbers);
         model.addAttribute("tree", tree.getJs());
         return "Tree";
     }
+
+    BstTree<Integer> feedTree(final String numbers) {
+        BstTree tree = new BstTree<Integer>();
+        List<String> toAdd = Arrays.asList(numbers.split(","));
+        toAdd.stream().forEachOrdered(n->tree.add(Integer.valueOf(n)));
+        return tree;
+    }
+
 
 }
 
