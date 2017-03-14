@@ -65,7 +65,7 @@ public class BstTree<T extends Comparable> {
         }
 
         Node y;
-        if ((deleteNode.getLeftSon() == null) || deleteNode.getRightSon() == null) {
+        if (deleteNode.getLeftSon() == null || deleteNode.getRightSon() == null) {
             y = deleteNode;
         } else {
             y = getSuccessor(deleteNode);
@@ -106,7 +106,6 @@ public class BstTree<T extends Comparable> {
 
         Node tmpNode = node.getParent();
         while (tmpNode != null && tmpNode.getLeftSon() != node) {
-            Node x = tmpNode;
             tmpNode = tmpNode.getParent();
         }
         return tmpNode;

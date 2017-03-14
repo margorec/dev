@@ -1,6 +1,5 @@
 package com.gorecki.controller;
 
-import com.gorecki.controller.ShowTree;
 import com.gorecki.tree.BstTree;
 import org.junit.Test;
 

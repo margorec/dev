@@ -2,7 +2,6 @@ package com.gorecki.tree;
 
 import org.junit.Test;
 import org.mockito.Mock;
-import com.gorecki.tree.Node;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

@@ -50,7 +50,7 @@ public class Node<T extends Comparable> {
         sb.append(jsName()).append(" = {");
 
         if (getParent() != null) {
-            sb.append("parent:").append("n_").append(getParent().getValue()).append(", ");
+            sb.append("parent:n_").append(getParent().getValue()).append(", ");
         }
 
         sb.append("text:{name:")
