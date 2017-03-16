@@ -2,15 +2,16 @@ package com.gorecki.tree;
 
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
+import org.mockito.Matchers;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 public class TreeTest {
     private Integer value1 = 10;
@@ -135,6 +136,14 @@ public class TreeTest {
 
         String expectedString = "n_32 = {text:{name:32}}, n_12 = {parent:n_32, text:{name:12}}, n_11 = {parent:n_12, text:{name:11}}, n_15 = {parent:n_12, text:{name:15}}, n_45 = {parent:n_32, text:{name:45}}, n_47 = {parent:n_45, text:{name:47}}, n_46 = {parent:n_47, text:{name:46}}, n_76 = {parent:n_47, text:{name:76}}, n_49 = {parent:n_76, text:{name:49}}, treeConfig=[config, n_32, n_12, n_11, n_15, n_45, n_47, n_46, n_76, n_49];";
         assertThat(tree.getJs(), is(expectedString));
-
     }
+
+//    @Test
+//    public void factoryTest() {
+//        BstTree<Integer> tree = BstTree.initIntegerTree("5,3,6,2,7,1");
+//        assertThat(tree, Matchers.notNull());
+//        assertThat(tree, instanceOf(BstTree.class));
+//
+//    }
+
 }

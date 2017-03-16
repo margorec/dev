@@ -4,6 +4,7 @@ package com.gorecki.tree;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -181,4 +182,12 @@ public class BstTree<T extends Comparable> {
         return sb.toString();
     }
 
+    public boolean addAll(final Collection<T> toAdd) {
+        try {
+            toAdd.stream().forEachOrdered(n -> add(n));
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
