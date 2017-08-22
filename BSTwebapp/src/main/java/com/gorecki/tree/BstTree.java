@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BstTree<T extends Comparable> {
+public class BSTTree<T extends Comparable> {
     private Node root = null;
 
     public Node add(T value) {
