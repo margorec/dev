@@ -1,8 +1,6 @@
 package com.gorecki.tree;
 
-
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -164,7 +162,9 @@ public class BSTTree<T extends Comparable> {
 
     public List<Node> getNodes() {
         List<Node> nodes = new LinkedList<>();
-        visitPreOrder(root, nodes);
+        if (root != null) {
+            visitPreOrder(root, nodes);
+        }
         return nodes;
     }
 
@@ -173,10 +173,11 @@ public class BSTTree<T extends Comparable> {
         List<String> nodeNames = new LinkedList<>();
         nodeNames.add("config");
 
-        for (Node node : getNodes()) {
+        getNodes().forEach(node -> {
             nodeNames.add(node.jsName());
             sb.append(node.serializeToJs()).append(", ");
-        }
+        });
+
         sb.append("treeConfig=").append(StringUtils.join(Arrays.asList(nodeNames), ", ")).append(";");
 
         return sb.toString();
@@ -186,7 +187,7 @@ public class BSTTree<T extends Comparable> {
         try {
             toAdd.stream().forEachOrdered(n -> add(n));
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

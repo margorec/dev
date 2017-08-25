@@ -1,9 +1,11 @@
 package com.gorecki.tree;
 
+import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +26,14 @@ public class TreeTest {
         tree.add(value3);
         tree.add(value4);
         return tree;
+    }
+
+    @Test
+    public void shouldCreateEmptyTree() {
+        BSTTree<Integer> tree = new BSTTree();
+        tree.addAll(Collections.EMPTY_LIST);
+        tree.getJs();
+        assertThat(tree.getRoot(), Matchers.nullValue());
     }
 
     @Test
@@ -136,12 +146,6 @@ public class TreeTest {
         assertThat(tree.getJs(), is(expectedString));
     }
 
-//    @Test
-//    public void factoryTest() {
-//        BSTTree<Integer> tree = BSTTree.initIntegerTree("5,3,6,2,7,1");
-//        assertThat(tree, Matchers.notNull());
-//        assertThat(tree, instanceOf(BSTTree.class));
-//
-//    }
+
 
 }
