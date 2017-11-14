@@ -11,13 +11,17 @@ nb-configuration.xml
 # Class Files #
 *.class
 
+# Gradle #
+.gradle
+ 
 # Package Files #
 *.jar
 *.war
 *.ear
 
-# Gradle
-
 #InteliJ
 .idea/
 *.iml
+
+# I dont want also these projects
+CurrencyReader
