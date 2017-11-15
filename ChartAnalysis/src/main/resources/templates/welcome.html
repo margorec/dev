@@ -10,35 +10,42 @@
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawBasic);
 
-    function drawBasic() {
+    <script th:inline="javascript">
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawBasic);
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('date', 'X');
-      data.addColumn('number', 'Dogs');
+        function drawBasic() {
 
-      data.addRows([
-        [new Date(2000, 8, 5), 0],   [new Date(2000, 8, 6), 10],  [new Date(2000, 8, 7), 23],  [new Date(2000, 8, 8), 17],  [new Date(2000, 8, 9), 18],  [new Date(2000, 8, 10), 9]
-      ]);
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'X');
+        data.addColumn('number', 'Dogs');
 
-      var options = {
-        hAxis: {
-          title: 'Time'
-        },
-        vAxis: {
-          title: 'Popularity'
+        var chartRawData = [[${chartData}]];
+        var dataArray = [];
+
+        for (var key in chartRawData) {
+            var rowArray = [];
+            rowArray.push(new Date(key));
+            rowArray.push(chartRawData[key]);
+            dataArray.push(rowArray);
         }
-      };
 
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        data.addRows(dataArray);
 
-      chart.draw(data, options);
-    }
+        var options = {
+            hAxis: {
+                title: 'Time'
+            },
+            vAxis: {
+                title: 'Price'
+            }
+        };
 
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
+        chart.draw(data, options);
+        }
     </script>
 </head>
 <body>
@@ -60,10 +67,7 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>Spring Boot Web Thymeleaf Example</h1>
-        <h2>
-            <span th:text="'Message: ' + ${message}"></span>
-        </h2>
+        <h2>PLY GPW</h2>
     </div>
 
 </div>

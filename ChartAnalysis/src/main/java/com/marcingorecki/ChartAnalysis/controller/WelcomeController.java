@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 
@@ -20,8 +21,8 @@ public class WelcomeController {
 
     @RequestMapping("/")
     public String welcome(Map<String, Object> model) {
-        parser.parseToTimeseries();
-        model.put("message", "check console");
+        Map<String, Double> data = parser.parseToTimeseries();
+        model.put("chartData", data);
         return "welcome";
     }
 
