@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,17 +24,19 @@ public class Parser {
     }
 
     public Map<String, Double> parseToTimeseries() {
-        String data = downloader.download();
-        return fetchDateAndFinalPrice(data);
+        List<String> data = downloader.download();
+        if (data.isEmpty()) {
+            return null;
+        }
+
+        return fetchDateAndFinalPrice(data.get(0));
     }
 
     private Map<String, Double> fetchDateAndFinalPrice(String data) {
         Map<String, Double> result = new LinkedHashMap<>();
         String[] lines = data.split(NEW_LINE_DELIMITER);
         Arrays.stream(lines).skip(1).forEach(line -> {
-
             String[] fields = line.split(FIELD_DELIMITER);
-            System.out.println(fields[0]);
             result.put(parseDate(fields[0]), Double.valueOf(fields[3]));
         });
         return result;
